@@ -14,7 +14,7 @@ This project combines data analytics, machine learning, and interactive visualiz
 
 ##  Features
 
-*  Crime data analysis and visualizatioN
+*  Crime data analysis and visualization
 *  Crime type prediction using ML models
 *  Geospatial crime mapping
 *  Interactive dashboard using Streamlit
