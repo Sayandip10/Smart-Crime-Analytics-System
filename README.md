@@ -118,9 +118,7 @@ python -m streamlit run app.py
 
 ---
 
-##  Developer
 
-**SAYANDIP ROY**
 
 
 ---
