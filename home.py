@@ -5,7 +5,7 @@ import requests
 
 def show():
 
-    # ---------------- LOTTIE ----------------
+    # ---------------- LOAD LOTTIE ----------------
     def load_lottie(url):
         r = requests.get(url)
         if r.status_code != 200:
@@ -14,16 +14,17 @@ def show():
 
     lottie_home = load_lottie("https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json")
 
-    # ---------------- SIDEBAR (ONLY HOME) ----------------
+    # ---------------- SIDEBAR ----------------
     st.sidebar.markdown("### 📎 Project Info")
     st.sidebar.info("Final Year ML Project\n\nCrime Prediction & Analysis System")
 
     st.sidebar.markdown("### 👨‍💻 Developer")
-    st.sidebar.write("Your Name")
+    st.sidebar.write("Sayandip Roy")
 
-    # ---------------- BACKGROUND + HERO ----------------
+    # ---------------- STYLE + ANIMATION ----------------
     st.markdown("""
     <style>
+
     .stApp {
         background: linear-gradient(rgba(14,17,23,0.85), rgba(14,17,23,0.95)),
         url("https://images.unsplash.com/photo-1508385082359-f38ae991e8f2");
@@ -33,44 +34,78 @@ def show():
 
     .hero {
         text-align: center;
-        padding: 60px 20px;
+        padding: 80px 20px;
     }
 
-    .title {
-        font-size: 55px;
+    .typing {
+        font-size: 60px;
         font-weight: bold;
         color: #00c6ff;
+        border-right: 3px solid #00c6ff;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent }
     }
 
     .subtitle {
         font-size: 22px;
         color: #e5e7eb;
         margin-top: 10px;
+        opacity: 0;
+        animation: fadeIn 2s ease forwards;
+        animation-delay: 2s;
     }
 
-    .cta-button button {
-        background: linear-gradient(90deg, #00c6ff, #0072ff);
-        color: white;
-        border-radius: 12px;
-        height: 3em;
-        width: 200px;
-        font-size: 18px;
-        margin-top: 20px;
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 1s ease forwards;
     }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card {
+        background: rgba(255,255,255,0.08);
+        padding: 25px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(0,198,255,0.6);
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
-    # ---------------- HERO SECTION ----------------
+    # ---------------- HERO ----------------
     st.markdown('<div class="hero">', unsafe_allow_html=True)
 
-    st.markdown('<div class="title">🚔 Crime Intelligence System</div>', unsafe_allow_html=True)
+    st.markdown('<div class="typing">🚔 Crime Intelligence System</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">AI-powered crime prediction, analytics & geospatial insights</div>', unsafe_allow_html=True)
 
-    # 🎬 Animation
-    st_lottie(lottie_home, height=250)
+    st_lottie(lottie_home, height=260)
 
-    # 🚀 BUTTON
-    if st.button("🚀 Go to Dashboard"):
+    if st.button("🚀 Explore Dashboard"):
         st.session_state.page = "📊 Dashboard"
 
     st.markdown('</div>', unsafe_allow_html=True)
@@ -78,36 +113,76 @@ def show():
     st.markdown("---")
 
     # ---------------- FEATURES ----------------
-    st.subheader("✨ Key Features")
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+    st.markdown("### ✨ Key Features")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("📊 Data", "200K+ Records")
-        st.caption("Large dataset for analysis")
+        st.markdown("""
+        <div class="card">
+            <h3>📊 Data Analysis</h3>
+            Analyze 200K+ crime records to discover patterns.
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric("🤖 Model", "XGBoost")
-        st.caption("High accuracy ML model")
+        st.markdown("""
+        <div class="card">
+            <h3>🤖 ML Prediction</h3>
+            Predict crime types using trained ML models.
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric("🗺️ Clusters", "5 Regions")
-        st.caption("Geospatial clustering")
+        st.markdown("""
+        <div class="card">
+            <h3>🗺️ Geo Insights</h3>
+            Visualize crime hotspots using clustering.
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("---")
+
+    # ---------------- STATS ----------------
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+    st.markdown("### 📊 System Highlights")
+
+    s1, s2, s3 = st.columns(3)
+
+    s1.metric("📊 Dataset", "200K+ Records")
+    s2.metric("🤖 Model", "XGBoost")
+    s3.metric("🗺️ Clusters", "5 Regions")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # # ---------------- DEMO VIDEO ----------------
+    # st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+    # st.markdown("### 🎬 Demo Preview")
+
+    # st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")  # 👉 replace with your project video
+
+    # st.markdown('</div>', unsafe_allow_html=True)
+
+    # st.markdown("---")
 
     # ---------------- DESCRIPTION ----------------
-    st.subheader("🔍 About System")
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+    st.markdown("### 🔍 What This System Does")
 
     st.markdown("""
-    This system helps:
-    
-    - 📊 Analyze crime patterns  
-    - 🤖 Predict crime types  
-    - 🗺️ Visualize hotspots  
-    - 📈 Generate insights for decision-making  
+    - 📊 Analyze crime patterns across regions  
+    - 🤖 Predict crime types based on location & time  
+    - 🗺️ Identify high-risk zones  
+    - 📈 Generate actionable insights  
     """)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("---")
 
-    st.success("👉 Use the sidebar or button above to explore the dashboard 🚀")
+    st.success("👉 Click 'Explore Dashboard' to start analyzing 🚀")
