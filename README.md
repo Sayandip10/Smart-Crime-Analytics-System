@@ -99,10 +99,10 @@ python -m streamlit run app.py
 ---
 
 ##  Screenshots
+<img width="1498" height="668" alt="image" src="https://github.com/user-attachments/assets/dd4b4755-1d26-406b-9d24-544f217de2b6" />
+<img width="1426" height="652" alt="image" src="https://github.com/user-attachments/assets/abb68bcd-239c-47af-8bcb-6e4b8104c79b" />
+<img width="1426" height="644" alt="image" src="https://github.com/user-attachments/assets/7741bfad-0097-46c1-81df-5cca16f25f65" />
 
-<img width="1524" height="711" alt="image" src="https://github.com/user-attachments/assets/01d5a8d3-2db9-461a-b79c-8eedfeb2061e" />
-<img width="1034" height="602" alt="image" src="https://github.com/user-attachments/assets/000ce34c-7438-47e4-bca1-0e868de7d872" />
-<img width="1033" height="460" alt="image" src="https://github.com/user-attachments/assets/434267c6-4ad3-433c-b1d0-e10d761261b9" />
 
 
 
