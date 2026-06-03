@@ -83,7 +83,7 @@ def show():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("📊 Data", "50K+ Records")
+        st.metric("📊 Data", "200K+ Records")
         st.caption("Large dataset for analysis")
 
     with col2:
