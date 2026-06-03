@@ -46,6 +46,32 @@ def show():
         animation: slideIn 0.4s ease;
     }
 
+    .card {
+        background: rgba(255,255,255,0.08);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(0,198,255,0.6);
+    }
+
+    .card-title {
+        font-size: 16px;
+        color: #aaa;
+    }
+
+    .card-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #00c6ff;
+    }
+
     @keyframes slideIn {
         from { transform: translateX(40px); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
@@ -100,20 +126,19 @@ def show():
     # ================= MAIN CONTENT =================
     with main_col:
 
-        # 🔥 Subtle loading bar (instant)
         progress = st.progress(0)
         progress.progress(100)
         progress.empty()
 
         area_encoded = le_area.transform([area])[0]
 
-        # ---------------- FILTER (NO DELAY) ----------------
+        # ---------------- FILTER ----------------
         if use_full_data:
-            filtered_df = df
+            filtered_df = df.copy()
         else:
             filtered_df = df.copy()
-            filtered_df = filtered_df[filtered_df['neighbourhood'] == area]
             filtered_df = filtered_df[
+                (filtered_df['neighbourhood'] == area) &
                 (filtered_df['hour'] >= hour - 1) &
                 (filtered_df['hour'] <= hour + 1)
             ]
@@ -133,10 +158,55 @@ def show():
             st.markdown("---")
 
             if len(filtered_df) > 0:
+
                 st.bar_chart(filtered_df['type'].value_counts().head(10))
 
                 hour_data = filtered_df['hour'].value_counts().sort_index()
                 st.line_chart(hour_data)
+
+                # 🔥 INSIGHTS CARDS ----------------
+                st.markdown("### 🧠 Smart Insights")
+
+                top_crime = filtered_df['type'].value_counts().idxmax()
+                top_crime_count = filtered_df['type'].value_counts().max()
+
+                peak_hour = filtered_df['hour'].value_counts().idxmax()
+                top_area = filtered_df['neighbourhood'].value_counts().idxmax()
+
+                c1, c2, c3, c4 = st.columns(4)
+
+                with c1:
+                    st.markdown(f"""
+                    <div class="card">
+                        <div class="card-title">Top Crime</div>
+                        <div class="card-value">{top_crime}</div>
+                        <div>{top_crime_count} cases</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                with c2:
+                    st.markdown(f"""
+                    <div class="card">
+                        <div class="card-title">Peak Hour</div>
+                        <div class="card-value">{peak_hour}:00</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                with c3:
+                    st.markdown(f"""
+                    <div class="card">
+                        <div class="card-title">Hotspot Area</div>
+                        <div class="card-value">{top_area}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                with c4:
+                    st.markdown(f"""
+                    <div class="card">
+                        <div class="card-title">Records</div>
+                        <div class="card-value">{len(filtered_df)}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
 
         # ===== TAB 2 =====
         with tab2:
