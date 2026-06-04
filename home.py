@@ -159,17 +159,6 @@ def show():
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("---")
-
-    # # ---------------- DEMO VIDEO ----------------
-    # st.markdown('<div class="fade-in">', unsafe_allow_html=True)
-    # st.markdown("### 🎬 Demo Preview")
-
-    # st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")  # 👉 replace with your project video
-
-    # st.markdown('</div>', unsafe_allow_html=True)
-
-    # st.markdown("---")
-
     # ---------------- DESCRIPTION ----------------
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     st.markdown("### 🔍 What This System Does")
